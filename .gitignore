@@ -1,0 +1,5 @@
+vendor/
+.idea/
+config/app.php
+index.php
+

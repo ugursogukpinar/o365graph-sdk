@@ -1,0 +1,16 @@
+{
+    "name": "ugursogukpinar/o365GraphSdk",
+    "description": "A php library for Office365 Graph API",
+    "type": "package",
+    "authors": [
+        {
+            "name": "ugursogukpinar",
+            "email": "sogukpinar.ugur@gmail.com"
+        }
+    ],
+    "autoload": {
+    	"psr-4": {
+    		"O365Graph\\": "src/"
+    	}
+    }
+}
