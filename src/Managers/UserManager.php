@@ -26,16 +26,7 @@ class UserManager extends BaseManager
      */
     public function create(User $userEntity)
     {
-        $payload = json_encode([
-            'displayName' => $userEntity->getDisplayName(),
-            'userPrincipalName' => $userEntity->getUserPrincipalName(),
-            'passwordProfile' => [
-                'password' => $userEntity->getPasswordProfile()->getPassword(),
-                'forceChangePasswordNextSignIn' => $userEntity->getPasswordProfile()->isChangeOnStart()
-            ],
-            'mailNickname' => $userEntity->getMailNickname(),
-            'accountEnabled' => $userEntity->isAccountEnabled()
-        ]);
+        $payload = json_encode($this->getUserInformation($userEntity));
 
         $requestManager = new RequestManager(static::$userResource, $payload, 'POST', $this->getHeader());
 
@@ -62,22 +53,39 @@ class UserManager extends BaseManager
 
 
     /**
-     * It deletes a user
+     * It deletes a user with UserID or UserPrincipalName
      *
+     * @param $id
      * @return bool
      */
-    public function delete()
+    public function delete($id)
     {
+        $url = static::$userResource . "/$id";
+
+        $requestManager = new RequestManager($url, [], 'DELETE', $this->getHeader());
+        $requestManager->send();
+
+
+        return json_decode($requestManager->getHttpResponse(), true);
     }
 
 
     /**
-     * Update a user
+     * Update a user with UserID or UserPrincipalName
      *
+     * @param $id
+     * @param User $userEntity
      * @return array
      */
-    public function update()
+    public function update($id, User $userEntity)
     {
+        $url = static::$userResource. "/$id";
+
+        $requestManager = new RequestManager($url, json_encode($this->getUserInformation($userEntity)), 'PATCH', $this->getHeader());
+        $requestManager->send();
+
+
+        return json_decode($requestManager->getHttpResponse(), true);
     }
 
 
@@ -97,4 +105,35 @@ class UserManager extends BaseManager
         return json_decode($requestManager->getHttpResponse(), true);
     }
 
+
+    /**
+     * @param User $userEntity
+     * @return array
+     */
+    private function getUserInformation(User $userEntity){
+        $data = [
+            'displayName' => $userEntity->getDisplayName(),
+            'userPrincipalName' => $userEntity->getUserPrincipalName(),
+            'mailNickname' => $userEntity->getMailNickname(),
+            'accountEnabled' => $userEntity->isAccountEnabled(),
+            'aboutMe' => $userEntity->getAboutMe(),
+            'assignedLicenses' => $userEntity->getAssignedLicenses(),
+            'birthday' => $userEntity->getBirthday(),
+            'city' => $userEntity->getCity(),
+            'department' => $userEntity->getDepartment(),
+            'preferredName' => $userEntity->getName(),
+            'surname' => $userEntity->getSurname()
+        ];
+
+        if ($userEntity->getPasswordProfile()) {
+            $data['passwordProfile'] = [
+                'password' => $userEntity->getPasswordProfile()->getPassword(),
+                'forceChangePasswordNextSignIn' => $userEntity->getPasswordProfile()->isChangeOnStart()
+            ];
+        }
+
+        return array_filter($data, function($val){
+            return $val;
+        });
+    }
 }

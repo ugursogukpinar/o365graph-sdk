@@ -40,16 +40,34 @@ class User
      */
     private $userPrincipalName;
 
+
     /**
-     * User constructor.
-     * @param String $userPrincipalName
-     * @param PasswordProfile $passwordProfile
+     * @var array
      */
-    public function __construct($userPrincipalName, PasswordProfile $passwordProfile)
-    {
-        $this->userPrincipalName = $userPrincipalName;
-        $this->passwordProfile = $passwordProfile;
-    }
+    private $personalInformation = [
+        'aboutMe' => '',
+        'birthday' => '',
+        'jobTitle' => '',
+        'department' => '',
+        'city' => ''
+    ];
+
+
+    /**
+     * @var array(AssignedLicense)
+     */
+    private $assignedLicenses;
+
+
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var string
+     */
+    private $surname;
 
     /**
      * @return String
@@ -110,7 +128,7 @@ class User
     /**
      * @param PasswordProfile $passwordProfile
      */
-    public function setPasswordProfile($passwordProfile)
+    public function setPasswordProfile(PasswordProfile $passwordProfile)
     {
         $this->passwordProfile = $passwordProfile;
     }
@@ -129,6 +147,140 @@ class User
     public function setUserPrincipalName($userPrincipalName)
     {
         $this->userPrincipalName = $userPrincipalName;
+    }
+
+    /**
+     * @param $aboutMe
+     */
+    public function setAboutMe($aboutMe)
+    {
+        $this->personalInformation['aboutMe'] = $aboutMe;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAboutMe()
+    {
+        return $this->personalInformation['aboutMe'];
+    }
+
+
+    /**
+     * @param $city
+     */
+    public function setCity($city)
+    {
+        $this->personalInformation['city'] = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->personalInformation['city'];
+    }
+
+
+    /**
+     * @param $department
+     */
+    public function setDepartment($department)
+    {
+        $this->personalInformation['department'] = $department;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getDepartment()
+    {
+        return $this->personalInformation['department'];
+    }
+
+
+    /**
+     * @param $birthday
+     */
+    public function setBirthday($birthday)
+    {
+        $this->personalInformation['birthday'] = $birthday;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getBirthday()
+    {
+        return $this->personalInformation['birthday'];
+    }
+
+    /**
+     * @param $title
+     */
+    public function setJobTitle($title)
+    {
+        $this->personalInformation['jobTitle'] = $title;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getJobTitle()
+    {
+        return $this->personalInformation['jobTitle'];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * @param mixed $surname
+     */
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAssignedLicenses()
+    {
+        return $this->assignedLicenses;
+    }
+
+    /**
+     * @param array $assignedLicenses
+     */
+    public function setAssignedLicenses($assignedLicenses)
+    {
+        $this->assignedLicenses = $assignedLicenses;
     }
 
 
