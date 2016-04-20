@@ -41,10 +41,6 @@ class UserManager extends BaseManager
 
         $requestManager->send();
 
-        if (!$requestManager->isSuccess()) {
-            return null;
-        }
-
         return json_decode($requestManager->getHttpResponse());
     }
 
@@ -82,6 +78,23 @@ class UserManager extends BaseManager
      */
     public function update()
     {
+    }
+
+
+    /**
+     * Gets single user with UserID or UserPrincipalName
+     * @param $id
+     * @return array
+     */
+    public function find($id)
+    {
+        $url = static::$userResource . "/$id";
+
+        $requestManager = new RequestManager($url, [], 'GET', $this->getHeader());
+        $requestManager->send();
+
+
+        return json_decode($requestManager->getHttpResponse(), true);
     }
 
 }
