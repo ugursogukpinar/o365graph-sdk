@@ -1,13 +1,27 @@
 {
     "name": "ugursogukpinar/o365GraphSdk",
     "description": "A php library for Office365 Graph API",
-    "type": "package",
+    "type": "library",
+    "version": "v0.0.1",
+    "license": "MIT",
+    "keywords": ["Office365", "Graph API", "Office365 PHP"],
     "authors": [
         {
             "name": "ugursogukpinar",
-            "email": "sogukpinar.ugur@gmail.com"
+            "email": "sogukpinar.ugur@gmail.com",
+            "homepage": "ugursogukpinar.kim",
+            "role": "Software Developer"
         }
     ],
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/ugursogukpinar/o365GraphSdk"
+      }
+    ],
+    "require": {
+      "ugursogukpinar/o365GraphSdk": "dev-master"
+    },
     "autoload": {
     	"psr-4": {
     		"O365Graph\\": "src/"

@@ -54,11 +54,12 @@ class UserManager extends BaseManager
      *
      * @return array
      */
-    public function all()
+    public function get()
     {
-        $requestManager = new RequestManager(static::$userResource, [], 'GET', $this->getHeader());
-        $requestManager->send();
+        $url = static::$userResource . '?'. $this->getQuery();
 
+        $requestManager = new RequestManager($url, [], 'GET', $this->getHeader());
+        $requestManager->send();
 
         return json_decode($requestManager->getHttpResponse(), true);
     }
