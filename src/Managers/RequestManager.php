@@ -99,7 +99,4 @@ class RequestManager
         $this->headers = array_merge($this->headers, ["Authorization: Bearer {$accessToken}"]);
     }
 
-
-
-
 }

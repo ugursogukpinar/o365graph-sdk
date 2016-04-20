@@ -15,7 +15,7 @@ class UserManager extends BaseManager
     /**
      * @var string
      */
-    private static $userResource = 'https://graph.microsoft.com/v1.0/users';
+    protected $resource = '/users';
 
 
     /**
@@ -28,7 +28,7 @@ class UserManager extends BaseManager
     {
         $payload = json_encode($this->getUserInformation($userEntity));
 
-        $requestManager = new RequestManager(static::$userResource, $payload, 'POST', $this->getHeader());
+        $requestManager = new RequestManager($this->getResource(), $payload, 'POST', $this->getHeader());
 
         $requestManager->send();
 
@@ -43,7 +43,7 @@ class UserManager extends BaseManager
      */
     public function get()
     {
-        $url = static::$userResource . '?'. $this->getQuery();
+        $url = $this->getResource() . '?'. $this->getQuery();
 
         $requestManager = new RequestManager($url, [], 'GET', $this->getHeader());
         $requestManager->send();
@@ -60,7 +60,7 @@ class UserManager extends BaseManager
      */
     public function delete($id)
     {
-        $url = static::$userResource . "/$id";
+        $url = $this->getResource() . "/$id";
 
         $requestManager = new RequestManager($url, [], 'DELETE', $this->getHeader());
         $requestManager->send();
@@ -79,7 +79,7 @@ class UserManager extends BaseManager
      */
     public function update($id, User $userEntity)
     {
-        $url = static::$userResource. "/$id";
+        $url = $this->getResource(). "/$id";
 
         $requestManager = new RequestManager($url, json_encode($this->getUserInformation($userEntity)), 'PATCH', $this->getHeader());
         $requestManager->send();
@@ -96,7 +96,7 @@ class UserManager extends BaseManager
      */
     public function find($id)
     {
-        $url = static::$userResource . "/$id";
+        $url = $this->getResource() . "/$id";
 
         $requestManager = new RequestManager($url, [], 'GET', $this->getHeader());
         $requestManager->send();

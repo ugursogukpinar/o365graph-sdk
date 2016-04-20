@@ -26,6 +26,21 @@ abstract class BaseManager
     private $query = [];
 
 
+    /**
+     * @var string
+     */
+    protected $baseService = 'https://graph.microsoft.com/v1.0';
+
+
+    /**
+     * @var string
+     */
+    protected $resource = '';
+
+
+    /**
+     * BaseManager constructor.
+     */
     public function __construct()
     {
         $this->setAccessToken();
@@ -149,5 +164,10 @@ abstract class BaseManager
     {
         $this->query['$count'] = 'true';
         return $this;
+    }
+
+
+    protected function getResource() {
+        return $this->baseService . $this->resource;
     }
 }
