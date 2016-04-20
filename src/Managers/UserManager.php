@@ -19,7 +19,7 @@ class UserManager extends BaseManager
 
 
     /**
-     * It creates a new user with given entity and returns
+     * It creates a new user given entity and returns
      * result.
      * @param User $userEntity
      * @return array
