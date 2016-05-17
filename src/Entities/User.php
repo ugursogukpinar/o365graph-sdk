@@ -69,6 +69,13 @@ class User
      */
     private $surname;
 
+
+    /**
+     * @var string
+     */
+    private $usageLocation;
+
+
     /**
      * @return String
      */
@@ -268,7 +275,7 @@ class User
     }
 
     /**
-     * @return array
+     * @return array(AssignedLicense)
      */
     public function getAssignedLicenses()
     {
@@ -276,11 +283,27 @@ class User
     }
 
     /**
-     * @param array $assignedLicenses
+     * @param array(AssignedLicense) $assignedLicenses
      */
     public function setAssignedLicenses($assignedLicenses)
     {
         $this->assignedLicenses = $assignedLicenses;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsageLocation()
+    {
+        return $this->usageLocation;
+    }
+
+    /**
+     * @param string $usageLocation
+     */
+    public function setUsageLocation($usageLocation)
+    {
+        $this->usageLocation = $usageLocation;
     }
 
 

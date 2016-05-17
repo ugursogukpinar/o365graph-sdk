@@ -2,4 +2,5 @@ vendor/
 .idea/
 config/app.php
 index.php
+.DS_Store
 

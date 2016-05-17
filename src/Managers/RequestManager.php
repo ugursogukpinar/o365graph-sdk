@@ -99,4 +99,12 @@ class RequestManager
         $this->headers = array_merge($this->headers, ["Authorization: Bearer {$accessToken}"]);
     }
 
+
+    /**
+     * @return int
+     */
+    public function getStatusCode()
+    {
+        return curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
+    }
 }

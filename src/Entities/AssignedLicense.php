@@ -15,14 +15,14 @@ class AssignedLicense
      *
      * @var array
      */
-    private $disabledPlans;
+    private $disabledPlans = [];
 
     /**
      * GUID
      *
      * @var string
      */
-    private $skuId;
+    private $skuId = '';
 
     /**
      * @return array

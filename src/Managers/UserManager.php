@@ -29,10 +29,14 @@ class UserManager extends BaseManager
         $payload = json_encode($this->getUserInformation($userEntity));
 
         $requestManager = new RequestManager($this->getResource(), $payload, 'POST', $this->getHeader());
-
         $requestManager->send();
 
-        return json_decode($requestManager->getHttpResponse());
+        if ($requestManager->getStatusCode() == 200 || $requestManager->getStatusCode() == 201) {
+            $licenseManager = new LicenseManager();
+            $licenseManager->addLicense($userEntity->getAssignedLicenses(), $userEntity->getUserPrincipalName());
+        }
+
+        return json_decode($requestManager->getHttpResponse(), true);
     }
 
 
@@ -84,7 +88,6 @@ class UserManager extends BaseManager
         $requestManager = new RequestManager($url, json_encode($this->getUserInformation($userEntity)), 'PATCH', $this->getHeader());
         $requestManager->send();
 
-
         return json_decode($requestManager->getHttpResponse(), true);
     }
 
@@ -117,12 +120,12 @@ class UserManager extends BaseManager
             'mailNickname' => $userEntity->getMailNickname(),
             'accountEnabled' => $userEntity->isAccountEnabled(),
             'aboutMe' => $userEntity->getAboutMe(),
-            'assignedLicenses' => $userEntity->getAssignedLicenses(),
             'birthday' => $userEntity->getBirthday(),
             'city' => $userEntity->getCity(),
             'department' => $userEntity->getDepartment(),
             'preferredName' => $userEntity->getName(),
-            'surname' => $userEntity->getSurname()
+            'surname' => $userEntity->getSurname(),
+            'usageLocation' => $userEntity->getUsageLocation()
         ];
 
         if ($userEntity->getPasswordProfile()) {

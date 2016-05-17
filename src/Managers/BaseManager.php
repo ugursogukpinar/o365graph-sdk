@@ -83,8 +83,7 @@ abstract class BaseManager
 
     private function prepareWhereStatement()
     {
-        if (isset($this->query['filter']))
-        {
+        if (isset($this->query['filter'])) {
             $this->query['$filter'] = join(" and ", $this->query['$filter']);
         }
     }
@@ -167,7 +166,8 @@ abstract class BaseManager
     }
 
 
-    protected function getResource() {
-        return $this->baseService . $this->resource;
+    protected function getResource()
+    {
+        return $this->baseService . call_user_func_array('sprintf', array_merge([$this->resource], func_get_args()));
     }
 }
