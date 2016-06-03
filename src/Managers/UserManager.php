@@ -133,6 +133,7 @@ class UserManager extends BaseManager
             'department' => $userEntity->getDepartment(),
             'preferredName' => $userEntity->getName(),
             'surname' => $userEntity->getSurname(),
+            'givenName' => $userEntity->getName(),
             'usageLocation' => $userEntity->getUsageLocation()
         ];
 
