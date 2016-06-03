@@ -15,6 +15,16 @@ class LicenseManager extends BaseManager
 
     protected $resource = "/users/%s/assignLicense";
 
+
+    /**
+     * LicenseManager constructor.
+     * @param array $keys
+     */
+    public function __construct(array $keys)
+    {
+        parent::__construct($keys);
+    }
+
     /**
      * @param $licenses AssignedLicense[]
      * @param $userId

@@ -16,6 +16,16 @@ class OrganizationManager extends BaseManager
      */
     protected $resource = '/subscribedSkus';
 
+
+    /**
+     * OrganizationManager constructor.
+     * @param array $keys
+     */
+    public function __construct(array $keys)
+    {
+        parent::__construct($keys);
+    }
+
     /**
      * @return array
      */

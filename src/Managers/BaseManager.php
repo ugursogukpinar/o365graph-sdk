@@ -39,10 +39,17 @@ abstract class BaseManager
 
 
     /**
-     * BaseManager constructor.
+     * @var array
      */
-    public function __construct()
+    protected $keys;
+
+    /**
+     * BaseManager constructor.
+     * @param $keys
+     */
+    public function __construct(array $keys)
     {
+        $this->keys = $keys;
         $this->setAccessToken();
     }
 
@@ -51,7 +58,7 @@ abstract class BaseManager
      */
     public function setAccessToken()
     {
-        $this->accessToken = AuthorizationManager::getAccessToken();
+        $this->accessToken = AuthorizationManager::getAccessToken($this->keys);
         return $this;
     }
 

@@ -8,8 +8,6 @@
 namespace O365Graph\Managers;
 
 
-use O365Graph\Parsers\ConfigParser;
-
 class AuthorizationManager
 {
     protected $loginUrl;
@@ -18,20 +16,25 @@ class AuthorizationManager
 
     private static $instance;
 
-    private function __construct()
+    /**
+     * @var array
+     */
+    protected $keys;
+
+    private function __construct(array $keys)
     {
-        $tenantId = ConfigParser::getConfig('tenant_id');
-        $this->loginUrl = "https://login.microsoft.com/{$tenantId}/oauth2/token";
+        $this->keys = $keys;
+        $this->loginUrl = "https://login.microsoft.com/{$keys['tenant_id']}/oauth2/token";
     }
 
 
     private function fetchToken()
     {
         $requestManager = new RequestManager($this->loginUrl,[
-            'client_id' => ConfigParser::getConfig('client_id'),
-            'client_secret' => ConfigParser::getConfig('client_secret'),
-            'grant_type' => ConfigParser::getConfig('grant_type'),
-            'resource' => ConfigParser::getConfig('resource')
+            'client_id' => $this->keys['client_id'],
+            'client_secret' => $this->keys['client_secret'],
+            'grant_type' => $this->keys['grant_type'],
+            'resource' => $this->keys['resource']
         ], 'POST', []);
 
         $requestManager->send();
@@ -59,11 +62,11 @@ class AuthorizationManager
         return $this->accessToken->access_token;
     }
 
-    public static function getAccessToken()
+    public static function getAccessToken(array $keys)
     {
 
         if (!self::$instance) {
-            self::$instance = new self;
+            self::$instance = new self($keys);
         }
 
         return self::$instance->getToken();

@@ -17,6 +17,14 @@ class UserManager extends BaseManager
      */
     protected $resource = '/users';
 
+    /**
+     * UserManager constructor.
+     * @param array $keys
+     */
+    public function __construct(array $keys)
+    {
+        parent::__construct($keys);
+    }
 
     /**
      * It creates a new user given entity and returns
