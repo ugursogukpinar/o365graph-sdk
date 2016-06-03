@@ -1,7 +1,6 @@
 {
     "name": "ugursogukpinar/o365graph-sdk",
     "description": "A php library for Office365 Graph API",
-    "version": "v0.0.1",
     "license": "MIT",
     "keywords": ["Office365", "Graph API", "Office365 PHP"],
     "authors": [
