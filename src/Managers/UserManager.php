@@ -40,7 +40,7 @@ class UserManager extends BaseManager
         $requestManager->send();
 
         if ($requestManager->getStatusCode() == 200 || $requestManager->getStatusCode() == 201) {
-            $licenseManager = new LicenseManager();
+            $licenseManager = new LicenseManager($this->keys);
             $licenseManager->addLicense($userEntity->getAssignedLicenses(), $userEntity->getUserPrincipalName());
         }
 
