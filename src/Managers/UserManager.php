@@ -132,8 +132,8 @@ class UserManager extends BaseManager
             'city' => $userEntity->getCity(),
             'department' => $userEntity->getDepartment(),
             'preferredName' => $userEntity->getName(),
-            'surname' => $userEntity->getSurname(),
-            'givenName' => $userEntity->getName(),
+            /*'surname' => $userEntity->getSurname(),*/
+            /*'givenName' => $userEntity->getName(),*/
             'usageLocation' => $userEntity->getUsageLocation()
         ];
 
