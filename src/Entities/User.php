@@ -56,7 +56,7 @@ class User
     /**
      * @var array(AssignedLicense)
      */
-    private $assignedLicenses;
+    private $assignedLicenses = array();
 
 
     /**
