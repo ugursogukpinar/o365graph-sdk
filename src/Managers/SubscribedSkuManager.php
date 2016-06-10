@@ -8,7 +8,7 @@
 namespace O365Graph\Managers;
 
 
-class OrganizationManager extends BaseManager
+class SubscribedSkuManager extends BaseManager
 {
 
     /**
