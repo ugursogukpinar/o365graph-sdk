@@ -18,4 +18,4 @@ Before you start, you should read [**this**](https://msdn.microsoft.com/en-us/of
 
 ## Documentation
 
-* [**Users**](https://github.com/ugursogukpinar/o365graph-sdk/docs/users.md)
+* [**Users**](https://github.com/ugursogukpinar/o365graph-sdk/blob/master/docs/users.md)
