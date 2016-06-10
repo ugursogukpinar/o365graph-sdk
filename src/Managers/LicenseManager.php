@@ -25,6 +25,7 @@ class LicenseManager extends BaseManager
         parent::__construct($keys);
     }
 
+
     /**
      * @param $licenses AssignedLicense[]
      * @param $userId
@@ -39,6 +40,26 @@ class LicenseManager extends BaseManager
                 'disabledPlans' => $license->getDisabledPlans(),
                 'skuId' => $license->getSkuId()
             ];
+        }
+
+        $requestManager = new RequestManager($this->getResource($userId), json_encode($data), 'POST', $this->getHeader());
+        $requestManager->send();
+
+        return json_decode($requestManager->getHttpResponse(), true);
+    }
+
+
+    /**
+     * @param $userId
+     * @param $licenses AssignedLicense[]
+     * @return mixed
+     */
+    public function removeLicense($userId, array $licenses)
+    {
+        $data = ['addLicenses'=> [], 'removeLicenses' => []];
+
+        foreach ($licenses as $license) {
+            array_push($data['removeLicenses'], $license->getSkuId());
         }
 
         $requestManager = new RequestManager($this->getResource($userId), json_encode($data), 'POST', $this->getHeader());

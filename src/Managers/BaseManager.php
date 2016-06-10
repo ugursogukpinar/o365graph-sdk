@@ -56,7 +56,7 @@ abstract class BaseManager
     /**
      * @return $this
      */
-    public function setAccessToken()
+    protected function setAccessToken()
     {
         $this->accessToken = AuthorizationManager::getAccessToken($this->keys);
         return $this;
@@ -66,7 +66,7 @@ abstract class BaseManager
     /**
      * @return array
      */
-    public function getHeader()
+    protected function getHeader()
     {
         return [
             "Content-Type: application/json",
@@ -80,7 +80,7 @@ abstract class BaseManager
      * @param $value
      * @return $this
      */
-    public function where($domain, $value)
+    protected function where($domain, $value)
     {
         $this->query['$filter'][] = "$domain eq '$value'";
 
@@ -98,7 +98,7 @@ abstract class BaseManager
     /**
      * @return string
      */
-    public function getAccessToken()
+    protected function getAccessToken()
     {
         return $this->accessToken;
     }
@@ -107,7 +107,7 @@ abstract class BaseManager
     /**
      * @return string
      */
-    public function getQuery()
+    protected function getQuery()
     {
         $this->prepareWhereStatement();
 
@@ -120,7 +120,7 @@ abstract class BaseManager
      * @param $count
      * @return $this
      */
-    public function take($count)
+    protected function take($count)
     {
         $this->query['$top'] = $count;
         return $this;
@@ -132,7 +132,7 @@ abstract class BaseManager
      * @param string $order
      * @return $this
      */
-    public function orderBy($field, $order = 'asc')
+    protected function orderBy($field, $order = 'asc')
     {
         $order = strtolower($order);
 
@@ -145,7 +145,7 @@ abstract class BaseManager
      * @param int $count
      * @return $this
      */
-    public function skip($count)
+    protected function skip($count)
     {
         $this->query['$skip'] = $count;
         return $this;
@@ -156,7 +156,7 @@ abstract class BaseManager
      * @param array $fields
      * @return $this
      */
-    public function select(array $fields)
+    protected function select(array $fields)
     {
         $this->query['$select'] = join(',', $fields);
         return $this;
@@ -166,7 +166,7 @@ abstract class BaseManager
     /**
      * @return $this
      */
-    public function withCount()
+    protected function withCount()
     {
         $this->query['$count'] = 'true';
         return $this;
