@@ -41,7 +41,7 @@ class UserManager extends BaseManager
 
         if ($requestManager->getStatusCode() == 200 || $requestManager->getStatusCode() == 201) {
             $licenseManager = new LicenseManager($this->keys);
-            $licenseManager->addLicense($userEntity->getAssignedLicenses(), $userEntity->getUserPrincipalName());
+            $licenseManager->addLicense($userEntity->getUserPrincipalName(), $userEntity->getAssignedLicenses());
         }
 
         return json_decode($requestManager->getHttpResponse(), true);
