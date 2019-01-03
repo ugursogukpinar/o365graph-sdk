@@ -131,15 +131,15 @@ class UserManager extends BaseManager
             'birthday' => $userEntity->getBirthday(),
             'city' => $userEntity->getCity(),
             'department' => $userEntity->getDepartment(),
-            'preferredName' => $userEntity->getName(),
-            /*'surname' => $userEntity->getSurname(),*/
-            /*'givenName' => $userEntity->getName(),*/
+            //'preferredName' => $userEntity->getName(),
+            //'surname' => $userEntity->getSurname(),
+            //'givenName' => $userEntity->getName(),
             'usageLocation' => $userEntity->getUsageLocation()
         ];
 
         if ($userEntity->getPasswordProfile()) {
             $data['passwordProfile'] = [
-                'password' => $userEntity->getPasswordProfile()->getPassword(),
+                'password' => (string)$userEntity->getPasswordProfile()->getPassword(),
                 'forceChangePasswordNextSignIn' => $userEntity->getPasswordProfile()->isChangeOnStart()
             ];
         }
